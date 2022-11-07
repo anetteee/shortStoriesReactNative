@@ -1,15 +1,35 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
 //import Pagination from "@mui/material/Pagination";
 //import Story from "./Story";
 import { FetchResult, Post } from "../Types";
 import { GET_POST_INVENTORY } from "../Queries";
+import { LinearGradient } from "expo-linear-gradient";
+import { Colors } from "../styles";
+
+import { Dimensions } from "react-native";
+
+var width = Dimensions.get("window").width; //full width
+var height = Dimensions.get("window").height; //full height
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
 const pageSize = 150;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: width,
+  },
+});
 
 export function Search() {
   //useStates for input search text, selected tags and sort
@@ -59,32 +79,32 @@ export function Search() {
   };
 
   return (
-    <ScrollView> 
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : (
-          <View>
-            {!data && (
-              <Text>
-                No stories available
-              </Text>
-            )}
-            {data && data.getPost.posts?.length === 0 && (
-              <Text>
-                Found no stories matching your search and choice of filter
-              </Text>
-            )}
-            {data &&
-              data.getPost.posts.map((inventory) => (
+    <ScrollView style={styles.container}>
+      <LinearGradient
+        colors={[Colors.green.s10, Colors.green.s20]}
+        start={[0, 0]}
+        end={[1, 0]}
+      >
+        <View style={{ width: "100%" }}>
+          {loading ? (
+            <Text>Loading...</Text>
+          ) : (
+            <View>
+              {!data && <Text>No stories available</Text>}
+              {data && data.getPost.posts?.length === 0 && (
                 <Text>
-                    {inventory.id}
+                  Found no stories matching your search and choice of filter
                 </Text>
-              ))}
-          </View>
-        )}
+              )}
+              {data &&
+                data.getPost.posts.map((inventory) => (
+                  <Text>{inventory.id}</Text>
+                ))}
+            </View>
+          )}
+        </View>
+      </LinearGradient>
     </ScrollView>
   );
 }
 export default Search;
-
-
