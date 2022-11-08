@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export function Search() {
+export function MainPage() {
   //useStates for input search text, selected tags and sort
   const [searchText, setSearchText] = React.useState<string>("");
   const [selects, setSelects] = React.useState<string>("");
@@ -107,4 +107,4 @@ export function Search() {
     </ScrollView>
   );
 }
-export default Search;
+export default MainPage;
