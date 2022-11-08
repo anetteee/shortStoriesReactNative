@@ -91,7 +91,7 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
             <Text>Like</Text>
             <Checkbox
               status={isFavorite ? "checked" : "unchecked"}
-              //onPress={(event) => handleChange(event)}
+              onPress={() => handleChange(!isFavorite)}
             />
             <Text> {inventory.reactions}</Text>
           </View>
