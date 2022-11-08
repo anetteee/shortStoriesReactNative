@@ -6,6 +6,7 @@ import { useQuery, gql } from "@apollo/client";
 //import Story from "./Story";
 import { FetchResult, Post } from "../Types";
 import { GET_POST_INVENTORY } from "../Queries";
+import Story from "./Story";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
@@ -77,7 +78,7 @@ export function Search() {
             {data &&
               data.getPost.posts.map((inventory) => (
                 <Text>
-                    {inventory.id}
+                    <Story key={inventory.id} inventory={inventory} />
                 </Text>
               ))}
           </View>
