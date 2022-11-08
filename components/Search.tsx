@@ -9,7 +9,7 @@ import { GET_POST_INVENTORY } from "../Queries";
 import { LinearGradient } from "expo-linear-gradient";
 import { Colors } from "../styles";
 import textStyles from "../styles/text";
-import containerStyles from "../styles/container";
+import containerStyles from "../styles/containers";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
