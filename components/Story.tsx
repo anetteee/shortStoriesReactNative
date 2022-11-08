@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { DECREASE_REACTION, INCREMENT_REACTION } from "../Queries";
 import { StoryProps } from "../Types";
 import { useRecoilState } from "recoil";
-import { expandedStoriesListState } from "./storyListState";
+import { expandedStoriesListState } from "../states/storyListState";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { Checkbox } from 'react-native-paper';
 
@@ -43,8 +43,10 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
           return i !== index;
         });
       });
+      console.log(expandedList);
     } else {
       setExpandedList((oldExpandedList) => [...oldExpandedList, inventory._id]);
+      console.log(expandedList);
     }
   };
 
