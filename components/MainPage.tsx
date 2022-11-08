@@ -16,6 +16,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Colors } from "../styles";
 
 import { Dimensions } from "react-native";
+import SearchSection from "./SearchSection";
 
 var width = Dimensions.get("window").width; //full width
 var height = Dimensions.get("window").height; //full height
@@ -33,10 +34,10 @@ const styles = StyleSheet.create({
 
 export function MainPage() {
   //useStates for input search text, selected tags and sort
-  const [searchText, setSearchText] = React.useState<string>("");
+
+  const [input, setInput] = React.useState<string>("");
   const [selects, setSelects] = React.useState<string>("");
   const [sortFilter, setsortFilter] = React.useState<string>("");
-  const [input, setInput] = React.useState<string>("");
 
   //useStates for pagination
   const [pageNumber, setPageNumber] = React.useState(1);
@@ -71,13 +72,6 @@ export function MainPage() {
     });
   };
 
-  //handel click on search-button
-  const handleOnClick = (ev: any) => {
-    //prevent refreash caused by form
-    ev.preventDefault();
-    setInput(searchText);
-  };
-
   return (
     <ScrollView style={styles.container}>
       <LinearGradient
@@ -85,24 +79,11 @@ export function MainPage() {
         start={[0, 0]}
         end={[1, 0]}
       >
-        <View style={{ width: "100%" }}>
-          {loading ? (
-            <Text>Loading...</Text>
-          ) : (
-            <View>
-              {!data && <Text>No stories available</Text>}
-              {data && data.getPost.posts?.length === 0 && (
-                <Text>
-                  Found no stories matching your search and choice of filter
-                </Text>
-              )}
-              {data &&
-                data.getPost.posts.map((inventory) => (
-                  <Text>{inventory.id}</Text>
-                ))}
-            </View>
-          )}
+        <View>
+          <SearchSection input={input} />
         </View>
+
+        <Text>{input}</Text>
       </LinearGradient>
     </ScrollView>
   );
