@@ -1,5 +1,12 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
 //import Pagination from "@mui/material/Pagination";
@@ -7,10 +14,12 @@ import { useQuery, gql } from "@apollo/client";
 import { FetchResult, Post } from "../Types";
 import { GET_POST_INVENTORY } from "../Queries";
 import Story from "./Story";
+import { Divider } from "react-native-paper";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
 const pageSize = 150;
+//const pageN = 1;
 
 export function Search() {
   //useStates for input search text, selected tags and sort
@@ -37,7 +46,7 @@ export function Search() {
 
   /*updates the offset and refetches the data with this offset 
   (the data for the next page)*/
-  const handlePageClick = (event: React.ChangeEvent<unknown>, page: number) => {
+  const handlePageClick = (page: number) => {
     setPageNumber(page);
     let newOffset = (page - 1) * pageSize;
     setOffset(newOffset);
@@ -59,8 +68,54 @@ export function Search() {
     setInput(searchText);
   };
 
+  //How the items is to be rendered
+  const renderItem = ({ item }) => <Story key={item.id} inventory={item} />;
+
+  //Will be altered (footer in the flatlist)
+  const endComponent = () => {
+    return (
+      <View>
+        <Divider />
+        <Text> List ended</Text>
+      </View>
+    );
+  };
+
+  /*const handleEmpty = () => {
+    return <Text> No stories available</Text>;
+  };*/
+
   return (
-    <ScrollView> 
+    <SafeAreaView style={{ flex: 1 }}>
+      <View>
+        {loading ? (
+          <Text>Loading...</Text>
+        ) : (
+          <View>
+            {!data && <Text>No stories available</Text>}
+            {data && (
+              <FlatList
+                ListFooterComponent={endComponent} //Footer prop that will be altered
+                data={data.getPost.posts} //The array of data to be displayed
+                keyExtractor={(item) => item.id} //Unique key for each item
+                renderItem={renderItem} //how to render the items from the list
+
+                /* Props that may help with handling empty result list
+                ListEmptyComponent={handleEmpty}
+                */
+
+                /* Props that may help with pagination:
+                onEndReachedThreshold={0.01}
+                onEndReached={() => handlePageClick(pageN+1)}
+                 */
+              />
+            )}
+          </View>
+        )}
+      </View>
+    </SafeAreaView>
+
+    /*<ScrollView> //Old soulution with ScrollView
         {loading ? (
           <Text>Loading...</Text>
         ) : (
@@ -83,9 +138,7 @@ export function Search() {
               ))}
           </View>
         )}
-    </ScrollView>
+    </ScrollView>*/
   );
 }
 export default Search;
-
-
