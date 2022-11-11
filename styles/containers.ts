@@ -11,8 +11,8 @@ const containerStyles = StyleSheet.create({
     },
     parentContainer: {
       width: "100%",
-      padding: 20,
-      margin: 5,
+      //padding: 20,
+      //margin: 5,
     },
   });
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
 //import Pagination from "@mui/material/Pagination";
@@ -69,28 +69,32 @@ export function Search() {
         start={[0, 0]}
         end={[1, 0]}
       >
-        <View style={containerStyles.parentContainer}>
-          <Text style={textStyles.title}>Fantastic short stories</Text>
-          <Text style={textStyles.title2}>Search among hundreds of titles</Text>
-          {loading ? (
-            <Text style={textStyles.text}>Loading...</Text>
-          ) : (
-            <View>
-              {!data && (
-                <Text style={textStyles.text}>No stories available</Text>
-              )}
-              {data && data.getPost.posts?.length === 0 && (
-                <Text style={textStyles.text}>
-                  Found no stories matching your search and choice of filter
-                </Text>
-              )}
-              {data &&
-                data.getPost.posts.map((inventory) => (
-                  <Text style={textStyles.text}>{inventory.id}</Text>
-                ))}
-            </View>
-          )}
-        </View>
+        <SafeAreaView style={{ flex: 1 }}>
+          <View style={containerStyles.parentContainer}>
+            <Text style={textStyles.title}>Fantastic short stories</Text>
+            <Text style={textStyles.title2}>
+              Search among hundreds of titles
+            </Text>
+            {loading ? (
+              <Text style={textStyles.text}>Loading...</Text>
+            ) : (
+              <View>
+                {!data && (
+                  <Text style={textStyles.text}>No stories available</Text>
+                )}
+                {data && data.getPost.posts?.length === 0 && (
+                  <Text style={textStyles.text}>
+                    Found no stories matching your search and choice of filter
+                  </Text>
+                )}
+                {data &&
+                  data.getPost.posts.map((inventory) => (
+                    <Text style={textStyles.text}>{inventory.id}</Text>
+                  ))}
+              </View>
+            )}
+          </View>
+        </SafeAreaView>
       </LinearGradient>
     </ScrollView>
   );
