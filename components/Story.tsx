@@ -5,7 +5,7 @@ import { StoryProps } from "../Types";
 import { useRecoilState } from "recoil";
 import { expandedStoriesListState } from "../states/storyListState";
 import { View, Text, Button, StyleSheet } from "react-native";
-import { Checkbox } from 'react-native-paper';
+import LikeButton from 'expo-like-button';
 
 const Story: React.FC<StoryProps> = ({ inventory }) => {
   /*expandedList is set to the value of the state,
@@ -32,6 +32,16 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
       decreaseReaction({ variables: { decreaseReactionsId: inventory.id } });
     }
   };
+
+  const onLikePress = async () => {
+    increaseReaction({ variables: { incrementReactionsId: inventory.id } });
+    setIsFavorite(true);
+  }
+
+  const onUnLikePress = async () => {
+    decreaseReaction({ variables: { decreaseReactionsId: inventory.id } });
+    setIsFavorite(false);
+  }
 
   /*The list of which stories the user wants to be expanded are updated.
   If the story was expanded its id is removed from the list, 
@@ -91,9 +101,9 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
         <View>
           <View>
             <Text>Like</Text>
-            <Checkbox
-              status={isFavorite ? "checked" : "unchecked"}
-              onPress={() => handleChange(!isFavorite)}
+            <LikeButton liked={isFavorite} onPress={isFavorite ? onUnLikePress : onLikePress} 
+              likedIconName={isFavorite ? "heart" : "heart-outline"}
+              unlikedColor={isFavorite ? "red" : "black"}
             />
             <Text> {inventory.reactions}</Text>
           </View>
