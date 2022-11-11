@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   View,
   FlatList,
   SafeAreaView,
+  Button,
 } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
@@ -18,8 +19,7 @@ import { Divider } from "react-native-paper";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
-const pageSize = 150;
-//const pageN = 1;
+const pageSize = 10;
 
 export function Search() {
   //useStates for input search text, selected tags and sort
@@ -33,32 +33,61 @@ export function Search() {
   const [offset, setOffset] = React.useState(0);
 
   //Hook to get data from the database via backend
-  const { loading, data, refetch } = useQuery<FetchResult>(GET_POST_INVENTORY, {
-    variables: {
-      tag: selects,
-      limit: pageSize,
-      offset: 0,
-      keepPreviousData: true,
-      input: input,
-      sortBy: sortFilter,
-    },
-  });
+  const { loading, data, fetchMore } = useQuery<FetchResult>(
+    GET_POST_INVENTORY,
+    {
+      variables: {
+        tag: selects,
+        limit: pageSize,
+        offset: 0,
+        keepPreviousData: true,
+        input: input,
+        sortBy: sortFilter,
+      },
+    }
+  );
+
+  useEffect(() => {
+    console.log("changed", data);
+  }, [data]);
 
   /*updates the offset and refetches the data with this offset 
   (the data for the next page)*/
-  const handlePageClick = (page: number) => {
-    setPageNumber(page);
+  const handlePageClick = async (page: number) => {
     let newOffset = (page - 1) * pageSize;
-    setOffset(newOffset);
 
-    refetch({
-      tag: selects,
-      sortBy: sortFilter,
-      limit: pageSize,
-      offset: newOffset,
-      input: input,
-      keepPreviousData: true,
-    });
+    console.log("Offset: ", newOffset);
+
+    console.log(
+      "fetched",
+      await fetchMore({
+        variables: {
+          tag: selects,
+          sortBy: sortFilter,
+          limit: pageSize,
+          offset: newOffset,
+          input: input,
+        },
+        updateQuery: (previousQueryResult, { fetchMoreResult }) => {
+          if (!fetchMoreResult) {
+            return previousQueryResult;
+          }
+          const newResult = Object.assign({}, previousQueryResult, {
+            getPost: {
+              count: previousQueryResult.getPost.count,
+              posts: [
+                ...previousQueryResult.getPost.posts,
+                ...fetchMoreResult.getPost.posts,
+              ],
+            },
+          });
+          return newResult;
+        },
+      })
+    );
+
+    setPageNumber(page);
+    setOffset(newOffset);
   };
 
   //handel click on search-button
@@ -77,6 +106,10 @@ export function Search() {
       <View>
         <Divider />
         <Text> List ended</Text>
+        <Button
+          title="LOAD MORE STORIES"
+          onPress={() => handlePageClick(pageNumber + 1)}
+        />
       </View>
     );
   };
@@ -99,15 +132,13 @@ export function Search() {
                 data={data.getPost.posts} //The array of data to be displayed
                 keyExtractor={(item) => item.id} //Unique key for each item
                 renderItem={renderItem} //how to render the items from the list
-
                 /* Props that may help with handling empty result list
                 ListEmptyComponent={handleEmpty}
                 */
 
-                /* Props that may help with pagination:
-                onEndReachedThreshold={0.01}
-                onEndReached={() => handlePageClick(pageN+1)}
-                 */
+                /* Props that may help with pagination:*/
+                //onEndReachedThreshold={0.5}
+                //onEndReached={() => handlePageClick(pageNumber + 1)}
               />
             )}
           </View>
