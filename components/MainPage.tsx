@@ -11,7 +11,14 @@ import { GET_POST_INVENTORY } from "../Queries";
 // satt til 150 som default -- SKAL ENDRES
 const pageSize = 150;
 
-export function Search() {
+export function MainPage() {
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      // width: width,
+    },
+  });
+
   //useStates for input search text, selected tags and sort
   const [searchText, setSearchText] = React.useState<string>("");
   const [selects, setSelects] = React.useState<string>("");
@@ -59,32 +66,22 @@ export function Search() {
   };
 
   return (
-    <ScrollView> 
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : (
-          <View>
-            {!data && (
-              <Text>
-                No stories available
-              </Text>
-            )}
-            {data && data.getPost.posts?.length === 0 && (
-              <Text>
-                Found no stories matching your search and choice of filter
-              </Text>
-            )}
-            {data &&
-              data.getPost.posts.map((inventory) => (
-                <Text>
-                    {inventory.id}
-                </Text>
-              ))}
-          </View>
-        )}
+    <ScrollView>
+      {loading ? (
+        <Text>Loading...</Text>
+      ) : (
+        <View>
+          {!data && <Text>No stories available</Text>}
+          {data && data.getPost.posts?.length === 0 && (
+            <Text>
+              Found no stories matching your search and choice of filter
+            </Text>
+          )}
+          {data &&
+            data.getPost.posts.map((inventory) => <Text>{inventory.id}</Text>)}
+        </View>
+      )}
     </ScrollView>
   );
 }
-export default Search;
-
-
+export default MainPage;
