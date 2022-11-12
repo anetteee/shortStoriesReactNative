@@ -20,6 +20,8 @@ import textStyles from "../styles/text";
 import containerStyles from "../styles/containers";
 import Story from "./Story";
 import { Divider } from "react-native-paper";
+import { useRecoilState } from "recoil";
+import { filterState } from "../states/filterState";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
@@ -35,7 +37,7 @@ export function Results() {
 
   //useStates for input search text, selected tags and sort
   const [searchText, setSearchText] = React.useState<string>("");
-  const [selects, setSelects] = React.useState<string>("");
+  const [filter, setFilter] = useRecoilState(filterState);
   const [sortFilter, setsortFilter] = React.useState<string>("");
   const [input, setInput] = React.useState<string>("");
 
@@ -48,7 +50,7 @@ export function Results() {
     GET_POST_INVENTORY,
     {
       variables: {
-        tag: selects,
+        tag: filter,
         limit: pageSize,
         offset: 0,
         keepPreviousData: true,
@@ -73,7 +75,7 @@ export function Results() {
       "fetched",
       await fetchMore({
         variables: {
-          tag: selects,
+          tag: filter,
           sortBy: sortFilter,
           limit: pageSize,
           offset: newOffset,

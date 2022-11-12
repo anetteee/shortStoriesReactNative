@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { useRecoilState } from "recoil";
+import { filterState } from "../states/filterState";
 
 const data = [
   { label: "History", value: "history" },
@@ -17,7 +19,7 @@ const data = [
 ];
 
 const SortDropdown = () => {
-  const [value, setValue] = useState(null);
+  const [filter, setFilter] = useRecoilState(filterState);
 
   return (
     <Dropdown
@@ -30,9 +32,9 @@ const SortDropdown = () => {
       labelField="label"
       valueField="value"
       placeholder="Select filter"
-      value={value}
+      value={filter}
       onChange={(item) => {
-        setValue(item.value);
+        setFilter(item.value);
       }}
       renderLeftIcon={() => (
         <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
