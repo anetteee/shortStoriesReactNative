@@ -22,6 +22,7 @@ import Story from "./Story";
 import { Divider } from "react-native-paper";
 import { useRecoilState } from "recoil";
 import { filterState } from "../states/filterState";
+import { sortState } from "../states/sortState";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
@@ -38,7 +39,7 @@ export function Results() {
   //useStates for input search text, selected tags and sort
   const [searchText, setSearchText] = React.useState<string>("");
   const [filter, setFilter] = useRecoilState(filterState);
-  const [sortFilter, setsortFilter] = React.useState<string>("");
+  const [sort, setSort] = useRecoilState(sortState);
   const [input, setInput] = React.useState<string>("");
 
   //useStates for pagination
@@ -55,7 +56,7 @@ export function Results() {
         offset: 0,
         keepPreviousData: true,
         input: input,
-        sortBy: sortFilter,
+        sortBy: sort,
       },
     }
   );
@@ -76,7 +77,7 @@ export function Results() {
       await fetchMore({
         variables: {
           tag: filter,
-          sortBy: sortFilter,
+          sortBy: sort,
           limit: pageSize,
           offset: newOffset,
           input: input,

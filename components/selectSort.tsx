@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { useRecoilState } from "recoil";
+import { sortState } from "../states/sortState";
 
 const data = [
   { label: "From least to most likes", value: "asc" },
-  { label: "From most to least likes", value: "" },
+  { label: "From most to least likes", value: "desc" },
 ];
 
 const DropdownComponent = () => {
-  const [value, setValue] = useState(null);
+  const [sort, setSort] = useRecoilState(sortState);
 
   return (
     <Dropdown
@@ -22,9 +24,9 @@ const DropdownComponent = () => {
       labelField="label"
       valueField="value"
       placeholder="Select sorting order"
-      value={value}
+      value={sort}
       onChange={(item) => {
-        setValue(item.value);
+        setSort(item.value);
       }}
       renderLeftIcon={() => (
         <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
