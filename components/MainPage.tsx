@@ -1,6 +1,7 @@
 import React from "react";
 import {
   ImageBackground,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,6 +18,7 @@ import { Colors } from "../styles";
 
 import { Dimensions } from "react-native";
 import SearchSection from "./SearchSection";
+import Results from "./Results";
 
 var width = Dimensions.get("window").width; //full width
 var height = Dimensions.get("window").height; //full height
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export function MainPage() {
+export default function MainPage() {
   //useStates for input search text, selected tags and sort
 
   const [input, setInput] = React.useState<string>("");
@@ -73,20 +75,27 @@ export function MainPage() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <LinearGradient
-        colors={[Colors.green.s10, Colors.green.s20]}
-        start={[0, 0]}
-        end={[1, 0]}
-      >
-        <View>
-          <SearchSection />
-        </View>
-
-        <Text>{input}</Text>
-      </LinearGradient>
-    </ScrollView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <SearchSection />
+      <Results />
+    </SafeAreaView>
   );
+
+  // return (
+  //   <ScrollView style={styles.container}>
+  //     <LinearGradient
+  //       colors={[Colors.green.s10, Colors.green.s20]}
+  //       start={[0, 0]}
+  //       end={[1, 0]}
+  //     >
+  //       <View>
+  //         <SearchSection />
+  //       </View>
+
+  //       <Text>{input}</Text>
+  //     </LinearGradient>
+  //   </ScrollView>
+  // );
 }
 // export default MainPage;
 // import { SafeAreaView } from "react-native";

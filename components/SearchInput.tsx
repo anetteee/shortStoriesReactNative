@@ -1,9 +1,14 @@
 import { StyleSheet, TextInput, SafeAreaView, Button } from "react-native";
 import React from "react";
+import { useRecoilState } from "recoil";
+import { inputState } from "../states/inputState";
 
 export default function SearchInput() {
+  const [input, setInput] = useRecoilState(inputState);
+  const [inputText, setInputText] = React.useState<string>("");
   //handel click on search-button
   const handleOnClick = (ev: any) => {
+    setInput(inputText);
     //prevent refreash caused by form
   };
 
@@ -11,9 +16,8 @@ export default function SearchInput() {
     <SafeAreaView>
       <TextInput
         style={styles.text_input_field}
-        onChangeText={(e) => {
-          handleOnClick;
-        }}
+        onChangeText={(newText) => setInputText(newText)}
+        defaultValue={inputText}
         // value={input}
         placeholder="Search..."
         placeholderTextColor="#D3D3D3"
