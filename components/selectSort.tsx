@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useRecoilState } from "recoil";
+import { pageNumberState } from "../states/pageNumberState";
 import { sortState } from "../states/sortState";
 
 const data = [
@@ -12,6 +13,7 @@ const data = [
 
 const DropdownComponent = () => {
   const [sort, setSort] = useRecoilState(sortState);
+  const [pageNumber, setPageNumber] = useRecoilState(pageNumberState);
 
   return (
     <Dropdown
@@ -26,6 +28,7 @@ const DropdownComponent = () => {
       placeholder="Select sorting order"
       value={sort}
       onChange={(item) => {
+        setPageNumber(1);
         setSort(item.value);
       }}
       renderLeftIcon={() => (

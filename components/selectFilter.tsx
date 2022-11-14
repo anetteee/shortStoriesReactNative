@@ -4,6 +4,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useRecoilState } from "recoil";
 import { filterState } from "../states/filterState";
+import { pageNumberState } from "../states/pageNumberState";
 
 const data = [
   { label: "History", value: "history" },
@@ -20,6 +21,7 @@ const data = [
 
 const SortDropdown = () => {
   const [filter, setFilter] = useRecoilState(filterState);
+  const [pageNumber, setPageNumber] = useRecoilState(pageNumberState);
 
   return (
     <Dropdown
@@ -34,6 +36,7 @@ const SortDropdown = () => {
       placeholder="Select filter"
       value={filter}
       onChange={(item) => {
+        setPageNumber(1);
         setFilter(item.value);
       }}
       renderLeftIcon={() => (
