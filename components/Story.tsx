@@ -4,8 +4,8 @@ import { DECREASE_REACTION, INCREMENT_REACTION } from "../Queries";
 import { StoryProps } from "../Types";
 import { useRecoilState } from "recoil";
 import { expandedStoriesListState } from "../states/storyListState";
-import { View, Text, Button, StyleSheet } from "react-native";
-import LikeButton from 'expo-like-button';
+import { View, Text, Button, StyleSheet, TouchableOpacity, Image} from "react-native";
+//import LikeButton from 'expo-like-button';
 
 const Story: React.FC<StoryProps> = ({ inventory }) => {
   /*expandedList is set to the value of the state,
@@ -23,21 +23,30 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [increaseReaction] = useMutation(INCREMENT_REACTION);
   const [decreaseReaction] = useMutation(DECREASE_REACTION);
-  
-  const handleChange = (e: boolean) => {
-    setIsFavorite(e);
-    if (e === true) {
-      increaseReaction({ variables: { incrementReactionsId: inventory.id } });
-    } else {
-      decreaseReaction({ variables: { decreaseReactionsId: inventory.id } });
-    }
-  };
 
+  /**
+   * Function for creating like button with heart images.
+   * @returns Image depending on if it is liked or not
+   */
+  function LikeButton() {
+    return(
+      <TouchableOpacity style={styles.opacity} activeOpacity={1.0} onPress={isFavorite? onUnLikePress: onLikePress}>
+        <Image style={isFavorite? styles.likeButton: styles.unLikeButton} 
+          source={isFavorite? require('../images/redHeart.png') : require('../images/heart.png')}></Image>
+      </TouchableOpacity>
+    );
+  } 
+
+  /**
+   * Help method for increasing reactions in database.
+   */
   const onLikePress = async () => {
     increaseReaction({ variables: { incrementReactionsId: inventory.id } });
     setIsFavorite(true);
   }
-
+  /**
+   * Help method for decreasing reactions in database. 
+   */
   const onUnLikePress = async () => {
     decreaseReaction({ variables: { decreaseReactionsId: inventory.id } });
     setIsFavorite(false);
@@ -70,7 +79,7 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
       {readMore ? (
         <>
           <View>
-            <Text style={readMoreStyle.container}>
+            <Text>
               {inventory.body}
             </Text>
 
@@ -99,24 +108,33 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
           />
         </View>
         <View>
-          <View>
-            <Text>Like</Text>
-            <LikeButton liked={isFavorite} onPress={isFavorite ? onUnLikePress : onLikePress} 
-              likedIconName={isFavorite ? "heart" : "heart-outline"}
-              unlikedColor={isFavorite ? "red" : "black"}
-            />
-            <Text> {inventory.reactions}</Text>
+          <View style={styles.likebuttonView}>
+              <LikeButton/>
           </View>
+          <Text> {inventory.reactions}</Text>
         </View>
       </View>
     </View>
   );
 };
 
-const readMoreStyle = StyleSheet.create({
-  container: {
-    //margin: {readMore ? "p-extra-margin" : "p-no-margin"},
+const styles = StyleSheet.create({
+  likeButton: {
+    width: 42,
+    height: 38, 
   },
+  unLikeButton: {
+    width: 45,
+    height: 40, 
+  },
+  likebuttonView: {
+    width: 45,
+    height: 46, 
+  },
+  opacity: {
+    alignItems: 'center',
+    flex: 1,
+  }
 });
 
 export default Story;
