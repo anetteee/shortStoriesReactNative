@@ -24,6 +24,7 @@ import { useRecoilState } from "recoil";
 import { filterState } from "../states/filterState";
 import { sortState } from "../states/sortState";
 import { inputState } from "../states/inputState";
+import { pageNumberState } from "../states/pageNumberState";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
@@ -43,7 +44,7 @@ export function Results() {
   const [sort, setSort] = useRecoilState(sortState);
 
   //useStates for pagination
-  const [pageNumber, setPageNumber] = React.useState(1);
+  const [pageNumber, setPageNumber] = useRecoilState(pageNumberState);
   const [offset, setOffset] = React.useState(0);
 
   //Hook to get data from the database via backend
@@ -112,7 +113,6 @@ export function Results() {
     return (
       <View>
         <Divider />
-        <Text> List ended</Text>
         <Button
           title="LOAD MORE STORIES"
           onPress={() => handlePageClick(pageNumber + 1)}
@@ -126,40 +126,6 @@ export function Results() {
   };*/
 
   return (
-    /*<ScrollView style={containerStyles.scrollContainer}>
-      <LinearGradient
-        colors={[Colors.green.s10, Colors.green.s20]}
-        start={[0, 0]}
-        end={[1, 0]}
-      >
-        <SafeAreaView style={{ flex: 1 }}>
-          <View style={containerStyles.parentContainer}>
-            <Text style={textStyles.title}>Fantastic short stories</Text>
-            <Text style={textStyles.title2}>
-              Search among hundreds of titles
-            </Text>
-            {loading ? (
-              <Text style={textStyles.text}>Loading...</Text>
-            ) : (
-              <View>
-                {!data && (
-                  <Text style={textStyles.text}>No stories available</Text>
-                )}
-                {data && data.getPost.posts?.length === 0 && (
-                  <Text style={textStyles.text}>
-                    Found no stories matching your search and choice of filter
-                  </Text>
-                )}
-                {data &&
-                  data.getPost.posts.map((inventory) => (
-                    <Text style={textStyles.text}>{inventory.id}</Text>
-                  ))}
-              </View>
-            )}
-          </View>
-        </SafeAreaView>
-      </LinearGradient>
-    </ScrollView>*/
     <SafeAreaView style={{ flex: 1 }}>
       <View>
         {loading ? (
@@ -173,44 +139,12 @@ export function Results() {
                 data={data.getPost.posts} //The array of data to be displayed
                 keyExtractor={(item) => item.id} //Unique key for each item
                 renderItem={renderItem} //how to render the items from the list
-                /* Props that may help with handling empty result list
-                ListEmptyComponent={handleEmpty}
-                */
-
-                /* Props that may help with pagination:*/
-                //onEndReachedThreshold={0.5}
-                //onEndReached={() => handlePageClick(pageNumber + 1)}
               />
             )}
           </View>
         )}
       </View>
     </SafeAreaView>
-
-    /*<ScrollView> //Old soulution with ScrollView
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : (
-          <View>
-            {!data && (
-              <Text>
-                No stories available
-              </Text>
-            )}
-            {data && data.getPost.posts?.length === 0 && (
-              <Text>
-                Found no stories matching your search and choice of filter
-              </Text>
-            )}
-            {data &&
-              data.getPost.posts.map((inventory) => (
-                <Text>
-                    <Story key={inventory.id} inventory={inventory} />
-                </Text>
-              ))}
-          </View>
-        )}
-    </ScrollView>*/
   );
 }
 export default Results;
