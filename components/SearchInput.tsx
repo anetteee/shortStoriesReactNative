@@ -2,12 +2,16 @@ import { StyleSheet, TextInput, SafeAreaView, Button } from "react-native";
 import React from "react";
 import { useRecoilState } from "recoil";
 import { inputState } from "../states/inputState";
+import { pageNumberState } from "../states/pageNumberState";
 
 export default function SearchInput() {
   const [input, setInput] = useRecoilState(inputState);
   const [inputText, setInputText] = React.useState<string>("");
+  const [pageNumber, setPageNumber] = useRecoilState(pageNumberState);
+
   //handel click on search-button
   const handleOnClick = (ev: any) => {
+    setPageNumber(1);
     setInput(inputText);
     //prevent refreash caused by form
   };
