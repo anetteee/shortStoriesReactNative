@@ -17,12 +17,13 @@ import { GET_POST_INVENTORY } from "../Queries";
 //import { LinearGradient } from "expo-linear-gradient";
 import { Colors } from "../styles";
 import textStyles from "../styles/text";
-import containerStyles from "../styles/containers";
+//import containerStyles from "../styles/containers";
 import Story from "./Story";
 import { Divider } from "react-native-paper";
 import { useRecoilState } from "recoil";
 import { filterState } from "../states/filterState";
 import { sortState } from "../states/sortState";
+import { inputState } from "../states/inputState";
 import { pageNumberState } from "../states/pageNumberState";
 
 //pageSize is the max number of stories per page
@@ -38,10 +39,9 @@ export function Results() {
   });
 
   //useStates for input search text, selected tags and sort
-  const [searchText, setSearchText] = React.useState<string>("");
+  const [searchText, setSearchText] = useRecoilState(inputState);
   const [filter, setFilter] = useRecoilState(filterState);
   const [sort, setSort] = useRecoilState(sortState);
-  const [input, setInput] = React.useState<string>("");
 
   //useStates for pagination
   const [pageNumber, setPageNumber] = useRecoilState(pageNumberState);
@@ -56,7 +56,7 @@ export function Results() {
         limit: pageSize,
         offset: 0,
         keepPreviousData: true,
-        input: input,
+        input: searchText,
         sortBy: sort,
       },
     }
@@ -81,7 +81,7 @@ export function Results() {
           sortBy: sort,
           limit: pageSize,
           offset: newOffset,
-          input: input,
+          input: searchText,
         },
         updateQuery: (previousQueryResult, { fetchMoreResult }) => {
           if (!fetchMoreResult) {
@@ -103,13 +103,6 @@ export function Results() {
 
     setPageNumber(page);
     setOffset(newOffset);
-  };
-
-  //handel click on search-button
-  const handleOnClick = (ev: any) => {
-    //prevent refreash caused by form
-    ev.preventDefault();
-    setInput(searchText);
   };
 
   //How the items is to be rendered
