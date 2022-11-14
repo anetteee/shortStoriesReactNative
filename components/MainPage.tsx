@@ -80,7 +80,7 @@ export function MainPage() {
         end={[1, 0]}
       >
         <View>
-          <SearchSection input={input} />
+          <SearchSection />
         </View>
 
         <Text>{input}</Text>
