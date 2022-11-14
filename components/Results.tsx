@@ -113,7 +113,7 @@ export function Results() {
     if (pageNumber >= data.getPost.count / 10) {
       return (
         <View>
-          <text> No more stories available</text>
+          <Text> No more stories available</Text>
         </View>
       );
     }
