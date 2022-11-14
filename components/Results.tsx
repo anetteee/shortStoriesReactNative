@@ -109,6 +109,14 @@ export function Results() {
 
   //Will be altered (footer in the flatlist)
   const endComponent = () => {
+    //gives user feedback that no stories matched their search and disables load button
+    if (data.getPost.count === 0) {
+      return (
+        <View>
+          <Text> No stories matched your search</Text>
+        </View>
+      );
+    }
     //disables load button and gives feedback if the final page is reached
     if (pageNumber >= data.getPost.count / 10) {
       return (
