@@ -10,7 +10,6 @@ import {
 } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
-//import Pagination from "@mui/material/Pagination";
 //import Story from "./Story";
 import { FetchResult, Post } from "../Types";
 import { GET_POST_INVENTORY } from "../Queries";
@@ -110,6 +109,14 @@ export function Results() {
 
   //Will be altered (footer in the flatlist)
   const endComponent = () => {
+    //disables load button and gives feedback if the final page is reached
+    if (pageNumber >= data.getPost.count / 10) {
+      return (
+        <View>
+          <text> No more stories available</text>
+        </View>
+      );
+    }
     return (
       <View>
         <Divider />
