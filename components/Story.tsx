@@ -25,19 +25,6 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
   const [decreaseReaction] = useMutation(DECREASE_REACTION);
 
   /**
-   * Function for creating like button with heart images.
-   * @returns Image depending on if it is liked or not
-   */
-  function LikeButton() {
-    return(
-      <TouchableOpacity style={styles.opacity} activeOpacity={1.0} onPress={isFavorite? onUnLikePress: onLikePress}>
-        <Image style={isFavorite? styles.likeButton: styles.unLikeButton} 
-          source={isFavorite? require('../images/redHeart.png') : require('../images/heart.png')}></Image>
-      </TouchableOpacity>
-    );
-  } 
-
-  /**
    * Help method for increasing reactions in database.
    */
   const onLikePress = async () => {
@@ -109,7 +96,10 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
         </View>
         <View>
           <View style={styles.likebuttonView}>
-              <LikeButton/>
+           <TouchableOpacity style={styles.opacity} activeOpacity={1.0} onPress={isFavorite? onUnLikePress: onLikePress}>
+              <Image style={isFavorite? styles.likeButton: styles.unLikeButton} 
+                source={isFavorite? require('../images/redHeart.png') : require('../images/heart.png')}></Image>
+            </TouchableOpacity>
           </View>
           <Text> {inventory.reactions}</Text>
         </View>
