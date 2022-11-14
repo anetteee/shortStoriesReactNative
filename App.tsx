@@ -2,7 +2,7 @@ import { ApolloProvider } from "@apollo/client";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { apolloClient } from "./apolloClient";
-import Search from "./components/Search";
+import MainPage from "./components/MainPage";
 import { RecoilRoot } from "recoil";
 
 export default function App() {
@@ -10,11 +10,10 @@ export default function App() {
     <RecoilRoot>
       <ApolloProvider client={apolloClient}>
         <View style={styles.container}>
-          <Search/>
+          <MainPage />
         </View>
       </ApolloProvider>
     </RecoilRoot>
-   
   );
 }
 

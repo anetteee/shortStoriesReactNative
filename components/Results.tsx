@@ -14,18 +14,32 @@ import { useQuery, gql } from "@apollo/client";
 //import Story from "./Story";
 import { FetchResult, Post } from "../Types";
 import { GET_POST_INVENTORY } from "../Queries";
+//import { LinearGradient } from "expo-linear-gradient";
+import { Colors } from "../styles";
+import textStyles from "../styles/text";
+import containerStyles from "../styles/containers";
 import Story from "./Story";
 import { Divider } from "react-native-paper";
+import { useRecoilState } from "recoil";
+import { filterState } from "../states/filterState";
+import { sortState } from "../states/sortState";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
 const pageSize = 10;
 
-export function Search() {
+export function Results() {
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      // width: width,
+    },
+  });
+
   //useStates for input search text, selected tags and sort
   const [searchText, setSearchText] = React.useState<string>("");
-  const [selects, setSelects] = React.useState<string>("");
-  const [sortFilter, setsortFilter] = React.useState<string>("");
+  const [filter, setFilter] = useRecoilState(filterState);
+  const [sort, setSort] = useRecoilState(sortState);
   const [input, setInput] = React.useState<string>("");
 
   //useStates for pagination
@@ -37,12 +51,12 @@ export function Search() {
     GET_POST_INVENTORY,
     {
       variables: {
-        tag: selects,
+        tag: filter,
         limit: pageSize,
         offset: 0,
         keepPreviousData: true,
         input: input,
-        sortBy: sortFilter,
+        sortBy: sort,
       },
     }
   );
@@ -62,8 +76,8 @@ export function Search() {
       "fetched",
       await fetchMore({
         variables: {
-          tag: selects,
-          sortBy: sortFilter,
+          tag: filter,
+          sortBy: sort,
           limit: pageSize,
           offset: newOffset,
           input: input,
@@ -119,6 +133,40 @@ export function Search() {
   };*/
 
   return (
+    /*<ScrollView style={containerStyles.scrollContainer}>
+      <LinearGradient
+        colors={[Colors.green.s10, Colors.green.s20]}
+        start={[0, 0]}
+        end={[1, 0]}
+      >
+        <SafeAreaView style={{ flex: 1 }}>
+          <View style={containerStyles.parentContainer}>
+            <Text style={textStyles.title}>Fantastic short stories</Text>
+            <Text style={textStyles.title2}>
+              Search among hundreds of titles
+            </Text>
+            {loading ? (
+              <Text style={textStyles.text}>Loading...</Text>
+            ) : (
+              <View>
+                {!data && (
+                  <Text style={textStyles.text}>No stories available</Text>
+                )}
+                {data && data.getPost.posts?.length === 0 && (
+                  <Text style={textStyles.text}>
+                    Found no stories matching your search and choice of filter
+                  </Text>
+                )}
+                {data &&
+                  data.getPost.posts.map((inventory) => (
+                    <Text style={textStyles.text}>{inventory.id}</Text>
+                  ))}
+              </View>
+            )}
+          </View>
+        </SafeAreaView>
+      </LinearGradient>
+    </ScrollView>*/
     <SafeAreaView style={{ flex: 1 }}>
       <View>
         {loading ? (
@@ -172,4 +220,4 @@ export function Search() {
     </ScrollView>*/
   );
 }
-export default Search;
+export default Results;
