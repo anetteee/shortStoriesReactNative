@@ -88,4 +88,16 @@ export function MainPage() {
     </ScrollView>
   );
 }
-export default MainPage;
+// export default MainPage;
+// import { SafeAreaView } from "react-native";
+// import Results from "./Results";
+// import SearchSection from "./SearchSection";
+
+// export default function MainPage() {
+//   return (
+//     <SafeAreaView style={{ flex: 1 }}>
+//       <SearchSection />
+//       <Results />
+//     </SafeAreaView>
+//   );
+// }
