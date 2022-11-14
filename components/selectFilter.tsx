@@ -7,6 +7,7 @@ import { filterState } from "../states/filterState";
 import { pageNumberState } from "../states/pageNumberState";
 
 const data = [
+  { label: "Select filter", value: null},
   { label: "History", value: "history" },
   { label: "Crime", value: "crime" },
   { label: "English", value: "english" },
@@ -17,6 +18,7 @@ const data = [
   { label: "Magical", value: "magical" },
   { label: "Mystery", value: "mystery" },
   { label: "American", value: "american" },
+  
 ];
 
 const SortDropdown = () => {
