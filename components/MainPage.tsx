@@ -1,16 +1,7 @@
 import React from "react";
-import {
-  ImageBackground,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { SafeAreaView } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
-//import Pagination from "@mui/material/Pagination";
-//import Story from "./Story";
 import { FetchResult, Post } from "../Types";
 import { GET_POST_INVENTORY } from "../Queries";
 import SearchSection from "./SearchSection";
@@ -64,23 +55,7 @@ export default function MainPage() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SearchSection />
-      {/* <Results /> */}
+      <Results />
     </SafeAreaView>
   );
-
-  // return (
-  //   <ScrollView style={styles.container}>
-  //     <LinearGradient
-  //       colors={[Colors.green.s10, Colors.green.s20]}
-  //       start={[0, 0]}
-  //       end={[1, 0]}
-  //     >
-  //       <View>
-  //         <SearchSection />
-  //       </View>
-
-  //       <Text>{input}</Text>
-  //     </LinearGradient>
-  //   </ScrollView>
-  // );
 }
