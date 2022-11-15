@@ -1,22 +1,9 @@
 import React, { useEffect } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  SafeAreaView,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, View, FlatList, Button } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
-//import Story from "./Story";
 import { FetchResult, Post } from "../Types";
 import { GET_POST_INVENTORY } from "../Queries";
-//import { LinearGradient } from "expo-linear-gradient";
-import { Colors } from "../styles";
-import textStyles from "../styles/text";
-//import containerStyles from "../styles/containers";
 import Story from "./Story";
 import { Divider } from "react-native-paper";
 import { useRecoilState } from "recoil";
@@ -30,13 +17,6 @@ import { pageNumberState } from "../states/pageNumberState";
 const pageSize = 10;
 
 export function Results() {
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      // width: width,
-    },
-  });
-
   //useStates for input search text, selected tags and sort
   const [searchText, setSearchText] = useRecoilState(inputState);
   const [filter, setFilter] = useRecoilState(filterState);
@@ -141,25 +121,32 @@ export function Results() {
   };*/
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View>
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : (
-          <View>
-            {!data && <Text>No stories available</Text>}
-            {data && (
-              <FlatList
-                ListFooterComponent={endComponent} //Footer prop that will be altered
-                data={data.getPost.posts} //The array of data to be displayed
-                keyExtractor={(item) => item.id} //Unique key for each item
-                renderItem={renderItem} //how to render the items from the list
-              />
-            )}
-          </View>
-        )}
-      </View>
-    </SafeAreaView>
+    <View style={styles.pink}>
+      {loading ? (
+        <Text>Loading...</Text>
+      ) : (
+        <View>
+          {!data && <Text>No stories available</Text>}
+          {data && (
+            <FlatList
+              ListFooterComponent={endComponent} //Footer prop that will be altered
+              data={data.getPost.posts} //The array of data to be displayed
+              keyExtractor={(item) => item.id} //Unique key for each item
+              renderItem={renderItem} //how to render the items from the list
+            />
+          )}
+        </View>
+      )}
+    </View>
   );
 }
 export default Results;
+
+const styles = StyleSheet.create({
+  pink: {
+    borderWidth: 1,
+    borderColor: "#FFB6C1",
+    height: 200,
+    marginTop: 500,
+  },
+});
