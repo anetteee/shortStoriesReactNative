@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   Button,
   Pressable,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import { useRecoilState } from "recoil";
@@ -40,9 +41,39 @@ export default function SearchInput() {
         placeholder="Search..."
         placeholderTextColor="#D3D3D3"
       />
-      <Pressable style={buttons.searchBtn} onPress={handleOnClick}>
-        <Text style={text.h3}>Search</Text>
-      </Pressable>
+      <View style={styling.searchView}>
+        <TouchableOpacity
+          style={styling.searchBtn}
+          onPress={handleOnClick}
+        >
+          <Text style={styling.textSearch}>
+            Search
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
+
+const styling = StyleSheet.create({
+  searchView: {
+    marginTop: 10,
+    alignSelf: "center",
+  },
+  searchBtn: {
+    textAlign: "center",
+    justifyContent: "center",
+    width: 200,
+    borderRadius: 3,
+    color: "black",
+    backgroundColor: "#f4f4f4",
+    borderWidth: 1,
+    borderColor: "#63ae59",
+    fontFamily: "Gill Sans",
+    padding: 8,
+    alignItems: "center",
+  },
+  textSearch: {
+    alignSelf: "center" 
+  }
+});
