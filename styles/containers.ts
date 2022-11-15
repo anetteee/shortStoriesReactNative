@@ -15,14 +15,26 @@ export const containers = StyleSheet.create({
     searchContainer: {
       minHeight: 120,
     },
-    filterContainer: {
-      marginTop: 30,
+    selectFilterContainer: {
+      flex: 1,
+      flexDirection: "column",
+      // marginTop: 30,
       paddingTop:10,
+      minHeight: 140,
+    },
+    selectSortContainer: {
+      flex: 1,
+      // paddingTop:10,
+      minHeight: 120,
+    },
+    filterContainer: {
+      flex: 1,
+      flexDirection: "column",
+      marginTop: 20,
       minHeight: 120,
     },
     sortContainer: {
-      marginTop: 30,
-      paddingTop:10,
+      flex: 1,
       minHeight: 120,
     },
   });

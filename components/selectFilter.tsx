@@ -7,7 +7,6 @@ import { filterState } from "../states/filterState";
 import { pageNumberState } from "../states/pageNumberState";
 import { text } from "../styles/theme";
 import { containers } from "../styles/containers";
-import { wrappers } from "../styles/containers";
 
 const data = [
   { label: "Select filter", value: null },
@@ -31,13 +30,13 @@ const SortDropdown = () => {
     <View>
       <View style={containers.filterContainer}>
         <Text style={text.label}>Filter stories</Text>
+
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           iconStyle={styles.iconStyle}
           data={data}
-          maxHeight={300}
           labelField="label"
           valueField="value"
           placeholder="Select filter"
@@ -66,11 +65,14 @@ const styles = StyleSheet.create({
   dropdown: {
     marginLeft: 10,
     marginRight: 10,
+
     padding: 5,
     color: "white",
-    height: 50,
-    // width: "100%",
-
+    width: "95%",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    position: "relative",
     borderColor: "white",
     borderWidth: 1,
   },

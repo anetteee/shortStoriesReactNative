@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useRecoilState } from "recoil";
@@ -21,13 +21,14 @@ const DropdownComponent = () => {
   return (
     <View>
       <View style={containers.sortContainer}>
+        <Text style={text.label}>Sort stories</Text>
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           iconStyle={styles.iconStyle}
           data={data}
-          maxHeight={300}
+          // maxHeight={300}
           labelField="label"
           valueField="value"
           placeholder="Select sorting order"
@@ -39,7 +40,7 @@ const DropdownComponent = () => {
           renderLeftIcon={() => (
             <AntDesign
               style={styles.icon}
-              color="black"
+              color="white"
               name="Safety"
               size={20}
             />
@@ -54,20 +55,25 @@ export default DropdownComponent;
 
 const styles = StyleSheet.create({
   dropdown: {
-    margin: 16,
-    height: 50,
-    width: "100%",
-    borderBottomColor: "gray",
-    borderBottomWidth: 0.5,
+    marginLeft: 10,
+    marginRight: 10,
+
+    padding: 5,
+    // height: 50,
+    // width: "100%",
+    borderColor: "white",
+    borderWidth: 1,
   },
   icon: {
     marginRight: 5,
   },
   placeholderStyle: {
     fontSize: 16,
+    color: "white",
   },
   selectedTextStyle: {
     fontSize: 16,
+    color: "white",
   },
   iconStyle: {
     width: 20,
