@@ -1,38 +1,16 @@
 import React from "react";
-import {
-  ImageBackground,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { SafeAreaView } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
-//import Pagination from "@mui/material/Pagination";
-//import Story from "./Story";
 import { FetchResult, Post } from "../Types";
 import { GET_POST_INVENTORY } from "../Queries";
-import { LinearGradient } from "expo-linear-gradient";
-import { Colors } from "../styles";
-
-import { Dimensions } from "react-native";
 import SearchSection from "./SearchSection";
 import Results from "./Results";
-
-var width = Dimensions.get("window").width; //full width
-var height = Dimensions.get("window").height; //full height
+import { theme } from "../styles/theme";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
 const pageSize = 150;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: width,
-  },
-});
 
 export default function MainPage() {
   //useStates for input search text, selected tags and sort
@@ -80,33 +58,4 @@ export default function MainPage() {
       <Results />
     </SafeAreaView>
   );
-
-  // return (
-  //   <ScrollView style={styles.container}>
-  //     <LinearGradient
-  //       colors={[Colors.green.s10, Colors.green.s20]}
-  //       start={[0, 0]}
-  //       end={[1, 0]}
-  //     >
-  //       <View>
-  //         <SearchSection />
-  //       </View>
-
-  //       <Text>{input}</Text>
-  //     </LinearGradient>
-  //   </ScrollView>
-  // );
 }
-// export default MainPage;
-// import { SafeAreaView } from "react-native";
-// import Results from "./Results";
-// import SearchSection from "./SearchSection";
-
-// export default function MainPage() {
-//   return (
-//     <SafeAreaView style={{ flex: 1 }}>
-//       <SearchSection />
-//       <Results />
-//     </SafeAreaView>
-//   );
-// }
