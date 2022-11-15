@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useRecoilState } from "recoil";
 import { filterState } from "../states/filterState";
 import { pageNumberState } from "../states/pageNumberState";
+import { text } from "../styles/theme";
+import { containers } from "../styles/containers";
 
 const data = [
-  { label: "Select filter", value: null},
+  { label: "Select filter", value: null },
   { label: "History", value: "history" },
   { label: "Crime", value: "crime" },
   { label: "English", value: "english" },
@@ -18,7 +20,6 @@ const data = [
   { label: "Magical", value: "magical" },
   { label: "Mystery", value: "mystery" },
   { label: "American", value: "american" },
-  
 ];
 
 const SortDropdown = () => {
@@ -26,25 +27,35 @@ const SortDropdown = () => {
   const [pageNumber, setPageNumber] = useRecoilState(pageNumberState);
 
   return (
-    <Dropdown
-      style={styles.dropdown}
-      placeholderStyle={styles.placeholderStyle}
-      selectedTextStyle={styles.selectedTextStyle}
-      iconStyle={styles.iconStyle}
-      data={data}
-      maxHeight={300}
-      labelField="label"
-      valueField="value"
-      placeholder="Select filter"
-      value={filter}
-      onChange={(item) => {
-        setPageNumber(1);
-        setFilter(item.value);
-      }}
-      renderLeftIcon={() => (
-        <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
-      )}
-    />
+    <View>
+      <View style={containers.filterContainer}>
+        <Text style={text.label}>Filter stories</Text>
+
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          labelField="label"
+          valueField="value"
+          placeholder="Select filter"
+          value={filter}
+          onChange={(item) => {
+            setPageNumber(1);
+            setFilter(item.value);
+          }}
+          renderLeftIcon={() => (
+            <AntDesign
+              style={styles.icon}
+              color="white"
+              name="Safety"
+              size={20}
+            />
+          )}
+        />
+      </View>
+    </View>
   );
 };
 
@@ -52,20 +63,29 @@ export default SortDropdown;
 
 const styles = StyleSheet.create({
   dropdown: {
-    margin: 16,
-    height: 50,
-    width: "100%",
-    borderBottomColor: "gray",
-    borderBottomWidth: 0.5,
+    marginLeft: 10,
+    marginRight: 10,
+
+    padding: 5,
+    color: "white",
+    width: "95%",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    position: "relative",
+    borderColor: "white",
+    borderWidth: 1,
   },
   icon: {
     marginRight: 5,
   },
   placeholderStyle: {
     fontSize: 16,
+    color: "white",
   },
   selectedTextStyle: {
     fontSize: 16,
+    color: "white",
   },
   iconStyle: {
     width: 20,
