@@ -25,18 +25,6 @@ export const containers = StyleSheet.create({
       paddingTop:10,
       minHeight: 120,
     },
-   
-  
-
-    scrollContainer: {
-      flex: 1,
-      width: width,
-    },
-    parentContainer: {
-      width: "100%",
-      //padding: 20,
-      //margin: 5,
-    },
   });
 
 export const wrappers = StyleSheet.create({
