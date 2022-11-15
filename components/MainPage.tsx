@@ -1,5 +1,5 @@
-import React from "react";
-import { SafeAreaView } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView, ScrollView, Text, Button, View } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
 import { FetchResult, Post } from "../Types";
@@ -7,6 +7,8 @@ import { GET_POST_INVENTORY } from "../Queries";
 import SearchSection from "./SearchSection";
 import Results from "./Results";
 import { theme } from "../styles/theme";
+import { text } from "../styles/theme";
+import { containers } from "../styles/containers";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
@@ -52,10 +54,22 @@ export default function MainPage() {
     });
   };
 
+  const [showSearchMenu, setShowSearchMenu] = useState(false);
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <SearchSection />
-      <Results />
-    </SafeAreaView>
+    // <SafeAreaView style={{ flex: 1 }}>
+    <View>
+      <View style={containers.headerContainer}>
+        <Text style={text.h1}>Fantastic short stories</Text>
+        <Text style={text.h2}>Search among hundreds of titles</Text>
+      </View>
+      <Button
+        color="white"
+        onPress={() => setShowSearchMenu(!showSearchMenu)}
+        title={showSearchMenu ? "Hide search menu" : "Show search menu"}
+      />
+      {showSearchMenu ? <SearchSection /> : <Results />}
+    </View>
+    // </SafeAreaView>
   );
 }

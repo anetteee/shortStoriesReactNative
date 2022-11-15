@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { ScrollView, View, Text, FlatList } from "react-native";
 import SearchInput from "./SearchInput";
 import SelectFilter from "./selectFilter";
 import SelectSort from "./selectSort";
@@ -9,10 +9,10 @@ import { containers } from "../styles/containers";
 export default function SearchSection() {
   return (
     <View>
-      <View style={containers.headerContainer}>
+      {/* <View style={containers.headerContainer}>
         <Text style={text.h1}>Fantastic short stories</Text>
         <Text style={text.h2}>Search among hundreds of titles</Text>
-      </View>
+      </View> */}
       <SearchInput />
 
       <View style={containers.selectFilterContainer}>

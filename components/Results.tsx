@@ -123,10 +123,12 @@ export function Results() {
   return (
     <View style={styles.pink}>
       {loading ? (
-        <Text>Loading...</Text>
+        <Text style={{ color: "white" }}>Loading...</Text>
       ) : (
         <View>
-          {!data && <Text>No stories available</Text>}
+          {!data && (
+            <Text style={{ color: "white" }}>No stories available</Text>
+          )}
           {data && (
             <FlatList
               ListFooterComponent={endComponent} //Footer prop that will be altered
@@ -144,9 +146,9 @@ export default Results;
 
 const styles = StyleSheet.create({
   pink: {
-    borderWidth: 1,
-    borderColor: "#FFB6C1",
-    height: 200,
-    marginTop: 500,
+    height: "100%",
+    marginTop: 20,
+    padding: 10,
+    color: "white",
   },
 });
