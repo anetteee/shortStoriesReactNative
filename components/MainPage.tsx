@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView, Text, Button, View } from "react-native";
+import { SafeAreaView, ScrollView, Text, Button, View, StyleSheet, TouchableOpacity } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
 import { FetchResult, Post } from "../Types";
@@ -57,19 +57,66 @@ export default function MainPage() {
   const [showSearchMenu, setShowSearchMenu] = useState(false);
 
   return (
-    // <SafeAreaView style={{ flex: 1 }}>
-    <View>
-      <View style={containers.headerContainer}>
-        <Text style={text.h1}>Fantastic short stories</Text>
-        <Text style={text.h2}>Search among hundreds of titles</Text>
+    <ScrollView>
+      <View>
+        <View style={containers.headerContainer}>
+          <Text style={text.h1}>Fantastic short stories</Text>
+          <Text style={text.h2}>Search among hundreds of titles</Text>
+        </View>
+        {showSearchMenu ? (
+          <> 
+            <SearchSection /> 
+              <View style={styles.showMoreView}>
+                <TouchableOpacity
+                  style={styles.showBtn}
+                  onPress={() => setShowSearchMenu(!showSearchMenu)}
+                >
+                  <Text style={{ alignSelf: "center" }}>
+                    {showSearchMenu ? "Hide search menu" : "Show search menu"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            <Results/>
+          </>
+          ) : (
+            <> 
+            <View style={styles.showMoreView}>
+              <TouchableOpacity
+                style={styles.showBtn}
+                onPress={() => setShowSearchMenu(!showSearchMenu)}
+              >
+                <Text style={{ alignSelf: "center" }}>
+                  {showSearchMenu ? "Hide search menu" : "Show search menu"}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            
+            <Results />
+            
+            </>)}
+    
+        
       </View>
-      <Button
-        color="white"
-        onPress={() => setShowSearchMenu(!showSearchMenu)}
-        title={showSearchMenu ? "Hide search menu" : "Show search menu"}
-      />
-      {showSearchMenu ? <SearchSection /> : <Results />}
-    </View>
-    // </SafeAreaView>
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  showBtn: {
+    textAlign: "center",
+    justifyContent: "center",
+    width: 200,
+    borderRadius: 3,
+    color: "black",
+    backgroundColor: "#f4f4f4",
+    borderWidth: 1,
+    borderColor: "#63ae59",
+    fontFamily: "Gill Sans",
+    padding: 8,
+    alignItems: "center",
+  },
+  showMoreView: {
+    marginTop: 10,
+    alignSelf: "center",
+  },
+});
