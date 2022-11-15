@@ -9,7 +9,7 @@ import { text } from "../styles/theme";
 import { containers } from "../styles/containers";
 
 const data = [
-  { label: "Select filter", value: null },
+  { label: "Show all", value: "" },
   { label: "History", value: "history" },
   { label: "Crime", value: "crime" },
   { label: "English", value: "english" },
