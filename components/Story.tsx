@@ -3,15 +3,8 @@ import React, { useState } from "react";
 import { DECREASE_REACTION, INCREMENT_REACTION } from "../Queries";
 import { StoryProps } from "../Types";
 import { useRecoilState } from "recoil";
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Pressable,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
+import styles from "../styles/Story";
 
 const Story: React.FC<StoryProps> = ({ inventory }) => {
   const [readMore, setReadMore] = useState(false);
@@ -38,18 +31,17 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
   };
 
   return (
-    <View style={styles.storyContainer}>
+    <View style={styles.parentView}>
       <Text style={styles.title}>{inventory.title}</Text>
       {readMore ? (
         <>
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          <View style={styles.textView}>
             <Text style={readMore ? styles.extraMargin : styles.noMargin}>
               {inventory.body}
             </Text>
             <Text style={styles.tags}>
               Tags: {inventory.tags[0]}, {inventory.tags[1]}
             </Text>
-
             {inventory.tags[2] ? (
               <Text style={styles.tags}>, {inventory.tags[2]}</Text>
             ) : (
@@ -58,24 +50,22 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
           </View>
         </>
       ) : (
-        <Text style={styles.body}>{inventory.body.substring(0, 100)}...</Text>
+        <Text style={styles.text}>{inventory.body.substring(0, 100)}...</Text>
       )}
-      <View style={styles.bottomContainer}>
+      <View style={styles.bottomView}>
         <View style={styles.readMoreView}>
           <TouchableOpacity
             style={styles.readMoreBtn}
             onPress={() => setReadMore(!readMore)}
           >
-            <Text style={{ alignSelf: "center" }}>
-              {readMore ? "Read less" : "Read more"}
-            </Text>
+            <Text>{readMore ? "Read less" : "Read more"}</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.heartandnumber}>
-          <View style={styles.likenumberview}>
-            <Text style={{ color: "white" }}> {inventory.reactions}</Text>
+        <View style={styles.favoriteView}>
+          <View style={styles.numberView}>
+            <Text style={styles.text}> {inventory.reactions}</Text>
           </View>
-          <View style={styles.likebuttonView}>
+          <View style={styles.heartBtnView}>
             <TouchableOpacity
               style={styles.opacity}
               activeOpacity={1.0}
@@ -96,97 +86,5 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  bottomContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  readMoreView: {
-    flex: 1,
-    flexDirection: "row",
-  },
-
-  heartandnumber: {
-    justifyContent: "space-evenly",
-    flexDirection: "row-reverse",
-  },
-  likenumberview: {
-    marginTop: 10,
-  },
-  readMoreBtn: {
-    textAlign: "center",
-    justifyContent: "center",
-    width: 95,
-    borderRadius: 3,
-    color: "black",
-    backgroundColor: "#f4f4f4",
-    borderWidth: 1,
-    borderColor: "#63ae59",
-    fontFamily: "Gill Sans",
-    padding: 8,
-    // paddingTop: 0.25,
-    // paddingBottom: 0.25,
-  },
-
-  storyContainer: {
-    borderWidth: 1,
-    borderColor: "white",
-    marginBottom: 10,
-    padding: 10,
-  },
-  title: {
-    color: "white",
-    fontFamily: "Gill Sans",
-    fontWeight: "bold",
-    fontSize: 18,
-  },
-
-  body: {
-    color: "white",
-    fontFamily: "Gill Sans",
-    fontSize: 17,
-    marginTop: 7,
-  },
-  tags: {
-    color: "white",
-    fontFamily: "Gill Sans",
-    fontSize: 17,
-  },
-  extraMargin: {
-    marginTop: 7,
-    color: "white",
-    fontFamily: "Gill Sans",
-    fontSize: 17,
-    marginBottom: 20,
-  },
-
-  noMargin: {
-    marginTop: 7,
-    color: "white",
-    fontFamily: "Gill Sans",
-    fontSize: 17,
-    marginBottom: 0,
-  },
-
-  likeButton: {
-    width: 41,
-    height: 35,
-  },
-  unLikeButton: {
-    width: 38,
-    height: 33,
-  },
-  likebuttonView: {
-    width: 41,
-    height: 35,
-  },
-  opacity: {
-    alignItems: "center",
-    flex: 1,
-  },
-});
 
 export default Story;

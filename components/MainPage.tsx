@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView, Text, Button, View, StyleSheet, TouchableOpacity } from "react-native";
+import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
 import { FetchResult, Post } from "../Types";
 import { GET_POST_INVENTORY } from "../Queries";
-import SearchSection from "./SearchSection";
+import SearchMenu from "./SearchMenu";
 import Results from "./Results";
-import { theme } from "../styles/theme";
-import { text } from "../styles/theme";
-import { containers } from "../styles/containers";
+import styles from "../styles/MainPage";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
@@ -59,64 +57,62 @@ export default function MainPage() {
   return (
     <ScrollView>
       <View>
-        <View style={containers.headerContainer}>
-          <Text style={text.h1}>Fantastic short stories</Text>
-          <Text style={text.h2}>Search among hundreds of titles</Text>
+        <View style={styles.headerView}>
+          <Text style={styles.h1}>Fantastic short stories</Text>
+          <Text style={styles.h2}>Search among hundreds of titles</Text>
         </View>
+
         {showSearchMenu ? (
-          <> 
-            <SearchSection /> 
-              <View style={styles.showMoreView}>
+          <>
+            <View style={styles.searchMenuView}>
+              <SearchMenu />
+
+              <View>
                 <TouchableOpacity
-                  style={styles.showBtn}
-                  onPress={() => setShowSearchMenu(!showSearchMenu)}
+                  onPress={() => {
+                    setShowSearchMenu(!showSearchMenu);
+                  }}
+                  style={
+                    showSearchMenu
+                      ? styles.closeSearchBtn
+                      : styles.showSearchBtn
+                  }
                 >
-                  <Text style={{ alignSelf: "center" }}>
-                    {showSearchMenu ? "Hide search menu" : "Show search menu"}
+                  <Text>
+                    {showSearchMenu ? "Close search menu" : "Show search menu"}
                   </Text>
                 </TouchableOpacity>
               </View>
-            <Results/>
+            </View>
+            <Image
+              style={styles.image}
+              source={require("../images/bookspngg.png")}
+            ></Image>
+            <Results />
           </>
-          ) : (
-            <> 
-            <View style={styles.showMoreView}>
+        ) : (
+          <>
+            <View style={styles.noSearchMenuView}>
               <TouchableOpacity
-                style={styles.showBtn}
+                style={
+                  showSearchMenu ? styles.closeSearchBtn : styles.showSearchBtn
+                }
                 onPress={() => setShowSearchMenu(!showSearchMenu)}
               >
-                <Text style={{ alignSelf: "center" }}>
+                <Text style={styles.textBtn}>
                   {showSearchMenu ? "Hide search menu" : "Show search menu"}
                 </Text>
               </TouchableOpacity>
             </View>
-            
+            <Image
+              style={styles.image}
+              source={require("../images/bookspngg.png")}
+            ></Image>
+
             <Results />
-            
-            </>)}
-    
-        
+          </>
+        )}
       </View>
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  showBtn: {
-    textAlign: "center",
-    justifyContent: "center",
-    width: 200,
-    borderRadius: 3,
-    color: "black",
-    backgroundColor: "#f4f4f4",
-    borderWidth: 1,
-    borderColor: "#63ae59",
-    fontFamily: "Gill Sans",
-    padding: 8,
-    alignItems: "center",
-  },
-  showMoreView: {
-    marginTop: 10,
-    alignSelf: "center",
-  },
-});
