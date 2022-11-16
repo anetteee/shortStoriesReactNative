@@ -1,8 +1,8 @@
 import { TextInput, View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { useRecoilState } from "recoil";
-import { inputState } from "../states/inputState";
-import { pageNumberState } from "../states/pageNumberState";
+import { inputState } from "../states/InputState";
+import { pageNumberState } from "../states/PageNumberState";
 import { styles } from "../styles/SearchInput";
 
 export default function SearchInput() {

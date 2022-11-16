@@ -3,8 +3,8 @@ import { Text, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useRecoilState } from "recoil";
-import { pageNumberState } from "../states/pageNumberState";
-import { sortState } from "../states/sortState";
+import { pageNumberState } from "../states/PageNumberState";
+import { sortState } from "../states/SortState";
 import styles from "../styles/SelectSort";
 
 const data = [

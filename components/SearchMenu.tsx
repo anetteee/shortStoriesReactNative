@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import SearchInput from "./SearchInput";
 import SelectFilter from "./SelectFilter";
-import SelectSort from "./selectSort";
+import SelectSort from "./SelectSort";
 import styles from "../styles/SearchMenu";
 
 export default function SearchMenu() {

@@ -86,7 +86,7 @@ export default function MainPage() {
             </View>
             <Image
               style={styles.image}
-              source={require("../images/bookspngg.png")}
+              source={require("../images/books.png")}
             ></Image>
             <Results />
           </>
@@ -106,7 +106,7 @@ export default function MainPage() {
             </View>
             <Image
               style={styles.image}
-              source={require("../images/bookspngg.png")}
+              source={require("../images/books.png")}
             ></Image>
 
             <Results />

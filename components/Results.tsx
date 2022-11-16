@@ -7,10 +7,10 @@ import { GET_POST_INVENTORY } from "../Queries";
 import Story from "./Story";
 import { Divider } from "react-native-paper";
 import { useRecoilState } from "recoil";
-import { filterState } from "../states/filterState";
-import { sortState } from "../states/sortState";
-import { inputState } from "../states/inputState";
-import { pageNumberState } from "../states/pageNumberState";
+import { filterState } from "../states/FilterState";
+import { sortState } from "../states/SortState";
+import { inputState } from "../states/InputState";
+import { pageNumberState } from "../states/PageNumberState";
 import styles from "../styles/Results";
 
 //pageSize is the max number of stories per page
