@@ -14,7 +14,7 @@ import { pageNumberState } from "../states/PageNumberState";
 import styles from "../styles/Results";
 
 //pageSize is the max number of stories per page
-// satt til 150 som default -- SKAL ENDRES
+//TODO change comment!
 const pageSize = 10;
 
 export function Results() {
@@ -119,20 +119,15 @@ export function Results() {
     );
   };
 
-  /*const handleEmpty = () => {
-    return <Text> No stories available</Text>;
-  };*/
-
   return (
     <View>
       <Text style={styles.header}>Results</Text>
-
       <View style={styles.parentView}>
         {loading ? (
           <Text style={styles.text}>Loading...</Text>
         ) : (
           <View>
-            {/* when database doesnt work?  maybe change the text to be more describing*/}
+            {/* when database doesnt work? TODO maybe change the text to be more describing*/}
             {!data && <Text style={styles.text}>No stories available</Text>}
             {data && (
               <FlatList

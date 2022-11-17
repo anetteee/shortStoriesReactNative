@@ -11,13 +11,13 @@ export default function SearchMenu() {
       <Text style={styles.header}>Search menu</Text>
       <SearchInput />
 
-      <View style={styles.selectFilterView}>
-        <SelectFilter />
-      </View>
+      {/* <View style={styles.selectFilterView}> */}
+      <SelectFilter />
+      {/* </View> */}
 
-      <View style={styles.selectSortView}>
-        <SelectSort />
-      </View>
+      {/* <View style={styles.selectSortView}> */}
+      <SelectSort />
+      {/* </View> */}
     </View>
   );
 }

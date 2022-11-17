@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { DECREASE_REACTION, INCREMENT_REACTION } from "../Queries";
 import { StoryProps } from "../Types";
-import { useRecoilState } from "recoil";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "../styles/Story";
 
@@ -36,14 +35,12 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
       {readMore ? (
         <>
           <View style={styles.textView}>
-            <Text style={readMore ? styles.extraMargin : styles.noMargin}>
-              {inventory.body}
-            </Text>
-            <Text style={styles.tags}>
+            <Text style={styles.text}>{inventory.body}</Text>
+            <Text style={styles.text}>
               Tags: {inventory.tags[0]}, {inventory.tags[1]}
             </Text>
             {inventory.tags[2] ? (
-              <Text style={styles.tags}>, {inventory.tags[2]}</Text>
+              <Text style={styles.text}>, {inventory.tags[2]}</Text>
             ) : (
               ""
             )}
@@ -61,26 +58,23 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
             <Text>{readMore ? "Read less" : "Read more"}</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.favoriteView}>
+        <View style={styles.heartAndNumberView}>
           <View style={styles.numberView}>
             <Text style={styles.text}> {inventory.reactions}</Text>
           </View>
-          <View style={styles.heartBtnView}>
-            <TouchableOpacity
-              style={styles.opacity}
-              activeOpacity={1.0}
-              onPress={isFavorite ? onUnLikePress : onLikePress}
-            >
-              <Image
-                style={isFavorite ? styles.likeButton : styles.unLikeButton}
-                source={
-                  isFavorite
-                    ? require("../images/blackheart.png")
-                    : require("../images/heart.png")
-                }
-              ></Image>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            activeOpacity={1.0}
+            onPress={isFavorite ? onUnLikePress : onLikePress}
+          >
+            <Image
+              style={styles.heartBtn}
+              source={
+                isFavorite
+                  ? require("../images/blackheart.png")
+                  : require("../images/heart.png")
+              }
+            ></Image>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
