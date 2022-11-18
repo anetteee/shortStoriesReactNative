@@ -1,4 +1,4 @@
-# Project 4 - Fantastic short stories mobile application
+# **Project 4 - Fantastic short stories mobile application**
 
 # Installing and running the application
 
@@ -18,7 +18,8 @@ Alternatively the app can be opened in an android or iOS simulator by pressing a
 
 # Task a: React Native Client with expo-Cli
 
-We chose task a, to make the frontend of the application from Project 3 in React Native. The backend used in this application is the same backend as in Project 3. For further information about this, read (link to Readme 3). The React Native Client is connected to the backend on the Virtual Machine.
+We chose task a, to make the frontend of the application from Project 3 in React Native. The backend used in this application is the same backend as in Project 3. For further information about this, read [README from project 3](https://gitlab.stud.idi.ntnu.no/it2810-h22/Team-27/project-3/-/blob/main/README.md)
+. The React Native Client is connected to the backend on the Virtual Machine.
 
 We chose this task since it gave us the opportunity to start learning about mobile application development, and we wanted to learn how apps created with React Native works.
 
@@ -82,15 +83,15 @@ The use of recoil for state management centralizes the state of the application,
 
 # Accessibility
 
-We have designed the app with the intention of making it user friendly for people with different disabilities. To ensure this we have used the four principles for accessibility for web content; perceivable, understandable, robust and operable.
+We have designed the app with the intention of making it user friendly for people with different disabilities. To ensure this we have used the four principles for accessibility for web content; **perceivable**, **understandable**, **robust** and **operable**.
 
-The app also has a clear color contrast between the background and the text, which makes it more perceivable and easier to understand the content.
+The app also has a clear color contrast between the background and the text, which makes it more **perceivable** and easier to understand the content.
 
-Above the various user interface elements there is a label that describes what the user is supposed to do. The application also gives feedback on actions. Touching the buttons changes the opacity which gives the user a hint of interaction. Furthermore, it gives feedback when there are no more stories to load, or no stories matching the search. This makes the app more understandable to use.
+Above the various user interface elements there is a label that describes what the user is supposed to do. The application also gives feedback on actions. Touching the buttons changes the opacity which gives the user a hint of interaction. Furthermore, it gives feedback when there are no more stories to load, or no stories matching the search. This makes the app more **understandable** to use.
 
-To ensure that the application is robust it should be tested on different devices. Since the group doesn’t have access to other devices than iOS, we can not be certain that it works as expected on other devices.
+To ensure that the application is **robust** it should be tested on different devices. Since the group doesn’t have access to other devices than iOS, we can not be completely certain that it works as expected on other devices.
 
-To take into account those with poor vision or who have difficulty pressing small buttons, we have made the touch surfaces of the user interface large. This is done to increase the operability of the page. Furthermore, all elements are accessible through touch, and the page is navigable through scrolling, both up and down. The placement of all elements are carefully considered to make the application as intuitive as possible.
+To take into account those with poor vision or who have difficulty pressing small buttons, we have made the touch surfaces of the user interface large. This is done to increase the **operability** of the page. Furthermore, all elements are accessible through touch, and the page is navigable through scrolling, both up and down. The placement of all elements are carefully considered to make the application as intuitive as possible.
 
 The picture below on the right shows how the screen looks when the user increases the text size in the setting of their iPhone. The picture below on the left shows the screen when the iPhone’s default settings are used. This shows how the application can ensure operability for people with poor vision.
 
@@ -104,8 +105,14 @@ We have completed an E2E-test manually to check that important functionality wor
 
 # Known errors
 
-Warning: Cache data may be lost when replacing the getPost field of a Query object.
-This warning probably occurs because we lack an id in our response from the backend. Since the backend was not supposed to be changed for our chosen task, the error has not been fixed. In addition the warning does not seem to affect the application.
+Fixing the errors described below would be of high priority in the hypothetical next sprint.
+
+A user can like a story several times. If a user likes a story, then makes a search and goes back to the story recently liked, the story will not show as liked. It is worth mentioning that the database is correctly changed, i.e. the count of likes increases each time the heart is pressed, but the likes are not connected to specific users and are therefore not saved in the app.
+
+If a user makes a search, closes the search menu, and then presses show search menu again, the search word recently written in the input field is not present.
+
+"Warning: Cache data may be lost when replacing the getPost field of a Query object."
+This warning probably occurs because we lack an id in our response from the backend. Since the backend was not supposed to be changed for our chosen task, the error has not been fixed. Due to this warning, other errors may occur. However, it is important to specify that the warning does not seem to affect the use of the application.
 A possible fix would have been to add an id-field in GetPostResponse (shown in image at the bottom) in typeDefs.js in backend , with unique id’s for example by having automatic increasing numbers.
 
 |              Warning               |       Warning shown in ExpoGo        |
