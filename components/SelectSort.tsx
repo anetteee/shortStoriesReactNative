@@ -12,7 +12,7 @@ const data = [
   { label: "From most to least likes", value: "desc" },
 ];
 
-const DropdownComponent = () => {
+const SelectSort = () => {
   const [sort, setSort] = useRecoilState(sortState);
   const [pageNumber, setPageNumber] = useRecoilState(pageNumberState);
 
@@ -24,9 +24,7 @@ const DropdownComponent = () => {
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
-          iconStyle={styles.iconStyle}
           data={data}
-          // maxHeight={300}
           labelField="label"
           valueField="value"
           placeholder="Select sorting order"
@@ -49,4 +47,4 @@ const DropdownComponent = () => {
   );
 };
 
-export default DropdownComponent;
+export default SelectSort;

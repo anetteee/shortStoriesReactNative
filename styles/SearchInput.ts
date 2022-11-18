@@ -2,18 +2,15 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   parentView: {
-    minHeight: 120,
-    marginLeft: 10,
-    marginRight: 10,
+    paddingTop: 20,
   },
   label: {
     fontSize: 16,
     color: "white",
-    paddingTop: 20,
     paddingBottom: 5,
   },
   inputField: {
-    height: 40,
+    height: 50,
     paddingLeft: 5,
     borderColor: "#FFF",
     color: "white",
@@ -21,15 +18,14 @@ export const styles = StyleSheet.create({
   },
   searchBtn: {
     marginTop: 5,
-    // textAlign: "center",
-    // justifyContent: "center",
     width: "100%",
     borderRadius: 3,
     color: "black",
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "#63ae59",
-    padding: 8,
+    paddingTop: 10,
+    paddingBottom: 10,
     alignItems: "center",
   },
 });

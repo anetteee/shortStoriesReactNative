@@ -4,9 +4,6 @@ const MainPage = StyleSheet.create({
   headerView: {
     paddingTop: 25,
     minHeight: 120,
-
-    // textAlign: "center",
-    // alignContent: "center"
   },
   searchMenuView: {
     marginTop: 20,
@@ -14,6 +11,8 @@ const MainPage = StyleSheet.create({
     borderWidth: 1,
     marginLeft: 10,
     marginRight: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   noSearchMenuView: {
     marginLeft: 10,
@@ -30,9 +29,7 @@ const MainPage = StyleSheet.create({
   h2: {
     fontSize: 17,
     color: "white",
-    // fontFamily: "Gill Sans",
     paddingBottom: 20,
-    // alignSelf: "center"
     textAlign: "center",
   },
   image: {
@@ -42,38 +39,28 @@ const MainPage = StyleSheet.create({
     alignSelf: "center",
   },
   showSearchBtn: {
-    textAlign: "center",
-    justifyContent: "center",
     width: 200,
     borderRadius: 3,
     color: "black",
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "#63ae59",
-    fontFamily: "Gill Sans",
-    padding: 8,
+    padding: 10,
     alignItems: "center",
   },
   closeSearchBtn: {
     alignSelf: "flex-end",
-    // textAlign: "center",
-    // justifyContent: "center",
-
-    marginRight: 10,
     marginBottom: 10,
     width: "50%",
     borderRadius: 3,
     color: "black",
-    // backgroundColor: "#f4f4f4",
     backgroundColor: "lightblue",
     borderWidth: 1,
     borderColor: "#63ae59",
-    fontFamily: "Gill Sans",
-    padding: 8,
+    paddingTop: 10,
+    paddingBottom: 10,
     alignItems: "center",
-  },
-  textBtn: {
-    alignSelf: "center",
+    marginTop: 25,
   },
 });
 

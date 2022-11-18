@@ -34,7 +34,6 @@ const FilterDropdown = () => {
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
-          iconStyle={styles.iconStyle}
           data={data}
           labelField="label"
           valueField="value"

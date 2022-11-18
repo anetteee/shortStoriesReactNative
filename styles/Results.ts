@@ -11,7 +11,6 @@ const Results = StyleSheet.create({
     color: "white",
     fontFamily: "GillSans-Bold",
     paddingTop: 5,
-    // alignSelf: "center"
     textAlign: "center",
   },
   text: {
@@ -22,17 +21,13 @@ const Results = StyleSheet.create({
   },
   loadMoreBtn: {
     alignSelf: "flex-end",
-    // textAlign: "center",
-    // justifyContent: "center",
-
     width: "50%",
     borderRadius: 3,
     color: "black",
-    // backgroundColor: "#f4f4f4",
     backgroundColor: "lightblue",
     borderWidth: 1,
     borderColor: "#63ae59",
-    padding: 8,
+    padding: 10,
     alignItems: "center",
   },
 });
