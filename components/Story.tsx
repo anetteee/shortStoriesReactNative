@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { DECREASE_REACTION, INCREMENT_REACTION } from "../Queries";
 import { StoryProps } from "../Types";
 import { useRecoilState } from "recoil";
-import { View, Text, Button, StyleSheet, TouchableOpacity, Image} from "react-native";
-
+import { View, Text, TouchableOpacity, Image } from "react-native";
+import styles from "../styles/Story";
 
 const Story: React.FC<StoryProps> = ({ inventory }) => {
   const [readMore, setReadMore] = useState(false);
@@ -21,71 +21,70 @@ const Story: React.FC<StoryProps> = ({ inventory }) => {
   const onLikePress = async () => {
     increaseReaction({ variables: { incrementReactionsId: inventory.id } });
     setIsFavorite(true);
-  }
+  };
   /**
-   * Help method for decreasing reactions in database. 
+   * Help method for decreasing reactions in database.
    */
   const onUnLikePress = async () => {
     decreaseReaction({ variables: { decreaseReactionsId: inventory.id } });
     setIsFavorite(false);
-  }
+  };
 
   return (
-    <View>
-      <Text>{inventory.title}</Text>
+    <View style={styles.parentView}>
+      <Text style={styles.title}>{inventory.title}</Text>
       {readMore ? (
         <>
-          <View>
-            <Text>
+          <View style={styles.textView}>
+            <Text style={readMore ? styles.extraMargin : styles.noMargin}>
               {inventory.body}
             </Text>
-            <Text>
+            <Text style={styles.tags}>
               Tags: {inventory.tags[0]}, {inventory.tags[1]}
             </Text>
-            {inventory.tags[2] ? <Text>, {inventory.tags[2]}</Text> : ""}
+            {inventory.tags[2] ? (
+              <Text style={styles.tags}>, {inventory.tags[2]}</Text>
+            ) : (
+              ""
+            )}
           </View>
         </>
       ) : (
-        <Text>{inventory.body.substring(0, 100)}...</Text>
+        <Text style={styles.text}>{inventory.body.substring(0, 100)}...</Text>
       )}
-      <View>
-        <View>
-          <Button
+      <View style={styles.bottomView}>
+        <View style={styles.readMoreView}>
+          <TouchableOpacity
+            style={styles.readMoreBtn}
             onPress={() => setReadMore(!readMore)}
-            title={readMore ? "Read less" : "Read more"}
-          />
+          >
+            <Text>{readMore ? "Read less" : "Read more"}</Text>
+          </TouchableOpacity>
         </View>
-        <View>
-          <View style={styles.likebuttonView}>
-           <TouchableOpacity style={styles.opacity} activeOpacity={1.0} onPress={isFavorite? onUnLikePress: onLikePress}>
-              <Image style={isFavorite? styles.likeButton: styles.unLikeButton} 
-                source={isFavorite? require('../images/redHeart.png') : require('../images/heart.png')}></Image>
+        <View style={styles.favoriteView}>
+          <View style={styles.numberView}>
+            <Text style={styles.text}> {inventory.reactions}</Text>
+          </View>
+          <View style={styles.heartBtnView}>
+            <TouchableOpacity
+              style={styles.opacity}
+              activeOpacity={1.0}
+              onPress={isFavorite ? onUnLikePress : onLikePress}
+            >
+              <Image
+                style={isFavorite ? styles.likeButton : styles.unLikeButton}
+                source={
+                  isFavorite
+                    ? require("../images/blackheart.png")
+                    : require("../images/heart.png")
+                }
+              ></Image>
             </TouchableOpacity>
           </View>
-          <Text> {inventory.reactions}</Text>
         </View>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  likeButton: {
-    width: 42,
-    height: 38, 
-  },
-  unLikeButton: {
-    width: 45,
-    height: 40, 
-  },
-  likebuttonView: {
-    width: 45,
-    height: 46, 
-  },
-  opacity: {
-    alignItems: 'center',
-    flex: 1,
-  }
-});
 
 export default Story;

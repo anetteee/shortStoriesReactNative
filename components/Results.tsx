@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, Button } from "react-native";
+import { Text, View, TouchableOpacity, FlatList } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
 import { FetchResult, Post } from "../Types";
@@ -7,10 +7,11 @@ import { GET_POST_INVENTORY } from "../Queries";
 import Story from "./Story";
 import { Divider } from "react-native-paper";
 import { useRecoilState } from "recoil";
-import { filterState } from "../states/filterState";
-import { sortState } from "../states/sortState";
-import { inputState } from "../states/inputState";
-import { pageNumberState } from "../states/pageNumberState";
+import { filterState } from "../states/FilterState";
+import { sortState } from "../states/SortState";
+import { inputState } from "../states/InputState";
+import { pageNumberState } from "../states/PageNumberState";
+import styles from "../styles/Results";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
@@ -93,7 +94,7 @@ export function Results() {
     if (data.getPost.count === 0) {
       return (
         <View>
-          <Text> No stories matched your search</Text>
+          <Text style={styles.text}> No stories matched your search</Text>
         </View>
       );
     }
@@ -101,17 +102,19 @@ export function Results() {
     if (pageNumber >= data.getPost.count / 10) {
       return (
         <View>
-          <Text> No more stories available</Text>
+          <Text style={styles.text}> No more stories available</Text>
         </View>
       );
     }
     return (
       <View>
         <Divider />
-        <Button
-          title="LOAD MORE STORIES"
+        <TouchableOpacity
           onPress={() => handlePageClick(pageNumber + 1)}
-        />
+          style={styles.loadMoreBtn}
+        >
+          <Text>Load more stories</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -121,32 +124,28 @@ export function Results() {
   };*/
 
   return (
-    <View style={styles.pink}>
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : (
-        <View>
-          {!data && <Text>No stories available</Text>}
-          {data && (
-            <FlatList
-              ListFooterComponent={endComponent} //Footer prop that will be altered
-              data={data.getPost.posts} //The array of data to be displayed
-              keyExtractor={(item) => item.id} //Unique key for each item
-              renderItem={renderItem} //how to render the items from the list
-            />
-          )}
-        </View>
-      )}
+    <View>
+      <Text style={styles.header}>Results</Text>
+
+      <View style={styles.parentView}>
+        {loading ? (
+          <Text style={styles.text}>Loading...</Text>
+        ) : (
+          <View>
+            {/* when database doesnt work?  maybe change the text to be more describing*/}
+            {!data && <Text style={styles.text}>No stories available</Text>}
+            {data && (
+              <FlatList
+                ListFooterComponent={endComponent} //Footer prop that will be altered
+                data={data.getPost.posts} //The array of data to be displayed
+                keyExtractor={(item) => item.id} //Unique key for each item
+                renderItem={renderItem} //how to render the items from the list
+              />
+            )}
+          </View>
+        )}
+      </View>
     </View>
   );
 }
 export default Results;
-
-const styles = StyleSheet.create({
-  pink: {
-    borderWidth: 1,
-    borderColor: "#FFB6C1",
-    height: 200,
-    marginTop: 500,
-  },
-});

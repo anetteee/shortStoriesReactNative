@@ -1,12 +1,12 @@
-import React from "react";
-import { SafeAreaView } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 
 import { useQuery, gql } from "@apollo/client";
 import { FetchResult, Post } from "../Types";
 import { GET_POST_INVENTORY } from "../Queries";
-import SearchSection from "./SearchSection";
+import SearchMenu from "./SearchMenu";
 import Results from "./Results";
-import { theme } from "../styles/theme";
+import styles from "../styles/MainPage";
 
 //pageSize is the max number of stories per page
 // satt til 150 som default -- SKAL ENDRES
@@ -52,10 +52,67 @@ export default function MainPage() {
     });
   };
 
+  const [showSearchMenu, setShowSearchMenu] = useState(false);
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <SearchSection />
-      <Results />
-    </SafeAreaView>
+    <ScrollView>
+      <View>
+        <View style={styles.headerView}>
+          <Text style={styles.h1}>Fantastic short stories</Text>
+          <Text style={styles.h2}>Search among hundreds of titles</Text>
+        </View>
+
+        {showSearchMenu ? (
+          <>
+            <View style={styles.searchMenuView}>
+              <SearchMenu />
+
+              <View>
+                <TouchableOpacity
+                  onPress={() => {
+                    setShowSearchMenu(!showSearchMenu);
+                  }}
+                  style={
+                    showSearchMenu
+                      ? styles.closeSearchBtn
+                      : styles.showSearchBtn
+                  }
+                >
+                  <Text>
+                    {showSearchMenu ? "Close search menu" : "Show search menu"}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <Image
+              style={styles.image}
+              source={require("../images/books.png")}
+            ></Image>
+            <Results />
+          </>
+        ) : (
+          <>
+            <View style={styles.noSearchMenuView}>
+              <TouchableOpacity
+                style={
+                  showSearchMenu ? styles.closeSearchBtn : styles.showSearchBtn
+                }
+                onPress={() => setShowSearchMenu(!showSearchMenu)}
+              >
+                <Text style={styles.textBtn}>
+                  {showSearchMenu ? "Hide search menu" : "Show search menu"}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <Image
+              style={styles.image}
+              source={require("../images/books.png")}
+            ></Image>
+
+            <Results />
+          </>
+        )}
+      </View>
+    </ScrollView>
   );
 }
