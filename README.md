@@ -94,16 +94,6 @@ To take into account those with poor vision or who have difficulty pressing smal
 
 The picture below on the right shows how the screen looks when the user increases the text size in the setting of their iPhone. The picture below on the left shows the screen when the iPhone’s default settings are used. This shows how the application can ensure operability for people with poor vision.
 
-<!-- <div style="display:flex">
-     <div style="flex:1;padding-right:10px;">
-          <img src="images/smallText.png" width="200"/>
-     </div>
-     <div style="flex:1;padding-left:10px;">
-          <img src="images/bigText.png" width="200"/>
-     </div>
-</div>
-<div -->
-
 |  Increased text size in settings   |           Default settings            |
 | :--------------------------------: | :-----------------------------------: |
 | ![First Image](images/bigText.png) | ![Second Image](images/smallText.png) |
@@ -116,14 +106,10 @@ We have completed an E2E-test manually to check that important functionality wor
 
 Warning: Cache data may be lost when replacing the getPost field of a Query object.
 This warning probably occurs because we lack an id in our response from the backend. Since the backend was not supposed to be changed for our chosen task, the error has not been fixed. In addition the warning does not seem to affect the application.
-A possible fix would have been to add an id-field in GetPostResponse (shown in pictire to the right) in typeDefs.js in backend , with unique id’s for example by having automatic increasing numbers.
+A possible fix would have been to add an id-field in GetPostResponse (shown in image at the bottom) in typeDefs.js in backend , with unique id’s for example by having automatic increasing numbers.
 
-<div style="display:flex">
-     <div style="flex:1;padding-right:5px;">
-          <img src="images/warning.png" width="250"/>
-     </div>
-     <div style="flex:1;margin-right:240px;">
-          <img src="images/solution.png" width="400"/>
-     </div>
-</div>
-<div
+|              Warning               |       Warning shown in ExpoGo        |
+| :--------------------------------: | :----------------------------------: |
+| ![First Image](images/warning.png) | ![Second Image](images/warning2.png) |
+
+<img src="images/solution.png" width="400"/>
