@@ -5,6 +5,11 @@ import { StoryProps } from "../Types";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "../styles/Story";
 
+/**
+ * Method for inventory of each story
+ * @param inventory with content of a Post
+ * @returns story
+ */
 const Story: React.FC<StoryProps> = ({ inventory }) => {
   const [readMore, setReadMore] = useState(false);
 

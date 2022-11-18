@@ -7,6 +7,9 @@ import { pageNumberState } from "../states/PageNumberState";
 import { sortState } from "../states/SortState";
 import styles from "../styles/SelectSort";
 
+/**
+ * Method for sorting stories
+ */
 const data = [
   { label: "From least to most likes", value: "asc" },
   { label: "From most to least likes", value: "desc" },

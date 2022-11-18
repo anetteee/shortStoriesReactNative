@@ -4,6 +4,10 @@ import SearchMenu from "./SearchMenu";
 import Results from "./Results";
 import styles from "../styles/MainPage";
 
+/**
+ * Main method that renders the application with hideable search menu and results from search
+ * @returns homepage
+ */
 export default function MainPage() {
   const [showSearchMenu, setShowSearchMenu] = useState(false);
 

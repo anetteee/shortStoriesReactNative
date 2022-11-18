@@ -7,6 +7,9 @@ import { filterState } from "../states/FilterState";
 import { pageNumberState } from "../states/PageNumberState";
 import styles from "../styles/SelectFilter";
 
+/**
+ * Method for filtering stories on tags
+ */
 const data = [
   { label: "Show all", value: "" },
   { label: "History", value: "history" },
