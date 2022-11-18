@@ -5,21 +5,21 @@ import { apolloClient } from "./apolloClient";
 import MainPage from "./components/MainPage";
 import { RecoilRoot } from "recoil";
 import { LinearGradient } from "expo-linear-gradient";
+import {styles} from "./styles/App";
+import {green, blue} from "./styles/App";
 
-var width = Dimensions.get("window").width; //full width
-var height = Dimensions.get("window").height; //full height
-
+/**
+ * Method for rendering the application
+ * @returns application
+ */
 export default function App() {
   return (
     <RecoilRoot>
       <ApolloProvider client={apolloClient}>
         <View>
           <LinearGradient
-            colors={["#256670", "#407056"]}
-            style={{
-              width: width,
-              height: height,
-            }}
+            colors={[blue, green]}
+            style={styles.linearGradient}
             start={[0, 0]}
             end={[1, 0]}
           >

@@ -13,14 +13,18 @@ import { inputState } from "../states/InputState";
 import { pageNumberState } from "../states/PageNumberState";
 import styles from "../styles/Results";
 
-//pageSize is the max number of fetched each time Load more stories button is pressed
-const pageSize = 10;
-
+/**
+ * Method that renders the result from database
+ * @returns short stories if available
+ */
 export function Results() {
   //useStates for input search text, selected tags and sort
   const [searchText] = useRecoilState(inputState);
   const [filter] = useRecoilState(filterState);
   const [sort] = useRecoilState(sortState);
+
+  //pageSize is the max number of fetched each time Load more stories button is pressed
+  const pageSize = 10;
 
   //useStates for pagination
   const [pageNumber, setPageNumber] = useRecoilState(pageNumberState);
