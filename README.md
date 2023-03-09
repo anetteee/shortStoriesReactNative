@@ -1,4 +1,8 @@
-# **Project 4 - Fantastic short stories mobile application**
+# ** Search engine with React Native**
+
+#About the project
+
+The project is developed in connection with the course IT2810 Web Development at NTNU. The team consist of the four members Rebecca Strandkleiv, Camilla Kopperud, Tuva Djupvik and Anette Johansen.
 
 # Installing and running the application
 
@@ -16,12 +20,10 @@ To be able to run the application locally you will need to do the install below 
 Scann QR-code with your phone and open in Expo Go.
 Alternatively the app can be opened in an android or iOS simulator by pressing a or i.
 
-# Task a: React Native Client with expo-Cli
+# React Native Client with expo-Cli
 
-We chose task a, to make the frontend of the application from Project 3 in React Native. The backend used in this application is the same backend as in Project 3. For further information about this, read [README from project 3](https://gitlab.stud.idi.ntnu.no/it2810-h22/Team-27/project-3/-/blob/main/README.md)
-. The React Native Client is connected to the backend on the Virtual Machine.
-
-We chose this task since it gave us the opportunity to start learning about mobile application development, and we wanted to learn how apps created with React Native works.
+The frontend of the application is in React Native. The backend used in this application is the same backend as https://github.com/anetteee/shortStories. 
+The React Native Client is connected to the backend on the Virtual Machine.
 
 # Functionality and content
 
@@ -63,15 +65,12 @@ The Apollo Client is mostly used to manage the data by GraphQL, as in project 3.
 
 ## State management - Recoil
 
-We have used Recoil, a state management library for React, to handle global state management. We experienced that this was a useful tool in project 3 and therefore chose to use it now as well. Recoil is used to share the states of chosen filter, sorting order and the searched text between files. Since we changed the way the application handles big datasets the use of recoil for the “Read more” state in project 3 was no longer needed and therefore removed in project 4.
+We have used Recoil, a state management library for React, to handle global state management. Recoil is used to share the states of chosen filter, sorting order and the searched text between files. 
 
 ## GraphQL
 
 To gather data from the database we send a query or a mutation on the GraphQL format from the frontend to the backend. The query and mutations are placed in Queries.ts.
 
-# About our GitLab-repo
-
-Issues on gitlab have been used to keep track of the development tasks during the project. We added the labels “TODO”, “DOING” and “DONE” to keep track of the status of the different tasks, and thereby track the progression of the project.
 
 # Sustainability
 
@@ -79,7 +78,7 @@ As mentioned above, for each time the user clicks on the “Load more stories”
 
 The api call to fetch the stories the user has searched for only happens when the user presses the Search button. Using a search functionality that does not continuously fetch data based on the input field is resource sustainable, since the app does not fetch unnecessary data.
 
-The use of recoil for state management centralizes the state of the application, which makes the communication between components easier, and thus the team’s workflow more effective. We have also created more autonomous components in this project compared to project 3, which makes it easier to structure the project when implementing new features in the future.
+The use of recoil for state management centralizes the state of the application, which makes the communication between components easier, and thus the team’s workflow more effective. 
 
 # Accessibility
 
