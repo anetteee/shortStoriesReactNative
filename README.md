@@ -1,4 +1,4 @@
-# Search engine with React Native
+# Search engine with React Native and Apollo Client
 
 # About the project
 
@@ -61,7 +61,7 @@ Expo Client enabled us to make an universal app that can run on the web, iOS and
 
 ## Apollo Client
 
-The Apollo Client is mostly used to manage the data by GraphQL, as in project 3. In this project we have also included the use of cache which reduces the number of fetches from the database. The cache is updated with updateQuery to contain both the previous results and the new, and this merged list is returned as the results of the fetchMore query.
+The Apollo Client is mostly used to manage the data by GraphQL. Use of cache is also included which reduces the number of fetches from the database. The cache is updated with updateQuery to contain both the previous results and the new, and this merged list is returned as the results of the fetchMore query.
 
 ## State management - Recoil
 
