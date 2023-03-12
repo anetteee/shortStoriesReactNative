@@ -2,7 +2,7 @@
 
 # About the project
 
-The project is developed in connection with the course IT2810 Web Development at NTNU. The team consist of the four members Rebecca Strandkleiv, Camilla Kopperud, Tuva Djupvik and Anette Johansen.
+The project is developed in connection with the course IT2810 Web Development at NTNU. The team consist of the four members Rebecca Strandkleiv, Camilla Kopperud, Tuva Djupvik and Eva Anette Johansen.
 
 # Installing and running the application
 
